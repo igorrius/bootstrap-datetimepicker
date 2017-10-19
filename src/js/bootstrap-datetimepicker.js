@@ -509,7 +509,11 @@
                 }
 
                 while (currentDate.isBefore(viewDate.clone().endOf('w'))) {
-                    row.append($('<th>').addClass('dow').text(currentDate.format('dd')));
+                    var rowElement =  $('<th>');
+                    if(currentDate.day() === 0 || currentDate.day() === 6) {
+                        rowElement.addClass('weekend-day');
+                    }
+                    row.append(rowElement.addClass('dow').text(currentDate.format('dd')));
                     currentDate.add(1, 'd');
                 }
                 widget.find('.datepicker-days thead').append(row);
