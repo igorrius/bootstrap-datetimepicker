@@ -727,6 +727,7 @@
                         html.push(row);
                     }
                     clsNames = ['day'];
+                    var ariaSelected = 'false';
                     if (currentDate.isBefore(viewDate, 'M')) {
                         clsNames.push('old');
                     }
@@ -735,6 +736,7 @@
                     }
                     if (currentDate.isSame(date, 'd') && !unset) {
                         clsNames.push('active');
+                        ariaSelected = 'true';
                     }
                     if (!isValid(currentDate, 'd')) {
                         clsNames.push('disabled');
@@ -751,7 +753,13 @@
                         classNames: clsNames
                     });
                     var currentDay = currentDate.date();
-                    row.append('<td id="dp-day-id-'+ currentDay +'" data-action="selectDay" role="gridcell" tabindex="-1" data-day="' + currentDate.format('L') + '" class="' + clsNames.join(' ') + '">' + currentDay + '</td>');
+                    row.append('<td id="dp-day-id-'+ currentDay +'" ' +
+                        'data-action="selectDay" ' +
+                        'role="gridcell" ' +
+                        'tabindex="-1" ' +
+                        'aria-selected="' + ariaSelected + '" ' +
+                        'data-day="' + currentDate.format('L') + '" ' +
+                        'class="' + clsNames.join(' ') + '">' + currentDay + '</td>');
                     currentDate.add(1, 'd');
                 }
 
