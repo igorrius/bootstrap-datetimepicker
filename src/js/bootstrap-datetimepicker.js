@@ -203,13 +203,13 @@
                                 )
                             ),
                     contTemplate = $('<tbody>')
-                        .append($('<tr>')
-                            .append($('<td>').attr('colspan', (options.calendarWeeks ? '8' : '7')))
+                        .append($('<tr role="row">')
+                            .append($('<td role="gridcell">').attr('colspan', (options.calendarWeeks ? '8' : '7')))
                             );
 
                 return [
                     $('<div>').addClass('datepicker-days')
-                        .append($('<table>').addClass('table-condensed')
+                        .append($('<table role="grid" tabindex="0">').addClass('table-condensed')
                             .append(headTemplate)
                             .append($('<tbody>'))
                             ),
@@ -327,7 +327,7 @@
             },
 
             getTemplate = function () {
-                var template = $('<div>').addClass('bootstrap-datetimepicker-widget dropdown-menu'),
+                var template = $('<div aria-hidden="false">').addClass('bootstrap-datetimepicker-widget dropdown-menu'),
                     dateView = $('<div>').addClass('datepicker').append(getDatePickerTemplate()),
                     timeView = $('<div>').addClass('timepicker').append(getTimePickerTemplate()),
                     content = $('<ul>').addClass('list-unstyled'),
@@ -509,8 +509,8 @@
                 }
 
                 while (currentDate.isBefore(viewDate.clone().endOf('w'))) {
-                    var rowElement =  $('<th>');
-                    if(currentDate.day() === 0 || currentDate.day() === 6) {
+                    var rowElement = $('<th>');
+                    if (currentDate.day() === 0 || currentDate.day() === 6) {
                         rowElement.addClass('weekend-day');
                     }
                     row.append(rowElement.addClass('dow').text(currentDate.format('dd')));
@@ -916,6 +916,8 @@
              * Hides the widget. Possibly will emit dp.hide
              */
             hide = function () {
+                // TODO: remove this shit
+                return;
                 var transitioning = false;
                 if (!widget) {
                     return picker;
