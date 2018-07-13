@@ -750,7 +750,7 @@
                         date: currentDate,
                         classNames: clsNames
                     });
-                    row.append('<td data-action="selectDay" data-day="' + currentDate.format('L') + '" class="' + clsNames.join(' ') + '">' + currentDate.date() + '</td>');
+                    row.append('<td data-action="selectDay" role="gridcell" tabindex="-1" data-day="' + currentDate.format('L') + '" class="' + clsNames.join(' ') + '">' + currentDate.date() + '</td>');
                     currentDate.add(1, 'd');
                 }
 
