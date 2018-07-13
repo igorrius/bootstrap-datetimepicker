@@ -727,7 +727,9 @@
                         html.push(row);
                     }
                     clsNames = ['day'];
-                    var ariaSelected = 'false';
+                    var ariaSelected = 'false',
+                        currentDay = currentDate.date(),
+                        dayElementId = 'dp-day-id-'+ currentDay;
                     if (currentDate.isBefore(viewDate, 'M')) {
                         clsNames.push('old');
                     }
@@ -737,6 +739,7 @@
                     if (currentDate.isSame(date, 'd') && !unset) {
                         clsNames.push('active');
                         ariaSelected = 'true';
+                        row.parents('table').attr('aria-activedescendant', dayElementId);
                     }
                     if (!isValid(currentDate, 'd')) {
                         clsNames.push('disabled');
@@ -752,8 +755,7 @@
                         date: currentDate,
                         classNames: clsNames
                     });
-                    var currentDay = currentDate.date();
-                    row.append('<td id="dp-day-id-'+ currentDay +'" ' +
+                    row.append('<td id="'+ dayElementId +'" ' +
                         'data-action="selectDay" ' +
                         'role="gridcell" ' +
                         'tabindex="-1" ' +
